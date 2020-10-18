@@ -11,6 +11,7 @@
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
+    "dayjs": "^1.9.3",
     "query-string": "^6.13.5",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
