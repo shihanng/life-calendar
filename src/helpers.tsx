@@ -68,3 +68,12 @@ export const generateData = (
 
   return data;
 };
+
+export function dataToMatrix<T>(data: T[], nPerRow: number): T[][] {
+  let copyData = [...data];
+  let matrix: T[][] = [];
+
+  while (copyData.length) matrix.push(copyData.splice(0, nPerRow));
+
+  return matrix;
+}

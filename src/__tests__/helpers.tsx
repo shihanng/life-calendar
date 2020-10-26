@@ -1,4 +1,4 @@
-import { generateDataArray, generateData } from "../helpers";
+import { generateDataArray, generateData, dataToMatrix } from "../helpers";
 import dayjs from "dayjs";
 
 test("boundaries and bins are same", () => {
@@ -27,4 +27,17 @@ test("test generateData", () => {
     startDate: dayjs("2020-12-27"),
     days: 0,
   });
+});
+
+test("test dataToMatrix", () => {
+  const matrix = dataToMatrix([1, 2, 3, 4, 5], 3);
+  expect(matrix).toEqual([
+    [1, 2, 3],
+    [4, 5],
+  ]);
+});
+
+test("test dataToMatrix single row", () => {
+  const matrix = dataToMatrix([1, 2, 3, 4, 5], 8);
+  expect(matrix).toEqual([[1, 2, 3, 4, 5]]);
 });
