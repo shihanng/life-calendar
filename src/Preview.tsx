@@ -36,12 +36,12 @@ const Preview = () => {
         )}
         xLabelsStyle={(index) => ({
           color: index % 2 ? "transparent" : "#777",
-          fontSize: ".8rem",
+          fontSize: ".7rem",
           margin: "1px 1px 1px 1px",
         })}
         yLabelsStyle={(index) => ({
           color: index % 2 ? "transparent" : "#777",
-          fontSize: ".75rem",
+          fontSize: ".8rem",
           textTransform: "uppercase",
           margin: "1px 1px 1px 1px",
         })}
