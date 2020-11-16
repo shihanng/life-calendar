@@ -39,7 +39,7 @@ export const generateDataArray = (
   ];
 };
 
-interface Week {
+export interface Week {
   startDate: Dayjs;
   days: number;
 }
