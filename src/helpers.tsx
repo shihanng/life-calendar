@@ -55,7 +55,7 @@ export const generateData = (
   let data: Array<Week> = [];
 
   while (currentDate.isSameOrBefore(endDate)) {
-    if (currentDate.day() == 0) {
+    if (currentDate.day() === 0) {
       data.push({ startDate: currentDate, days: 0 });
     }
 
