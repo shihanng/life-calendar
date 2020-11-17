@@ -16,9 +16,10 @@ const Settings = () => {
         />
         years
       </label>{" "}
-      <label htmlFor="years">
+      <label htmlFor="from-date">
         from
         <input
+          id="from-date"
           type="date"
           value={
             fromDate
