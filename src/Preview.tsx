@@ -26,7 +26,7 @@ const Preview = () => {
   return (
     <div>
       <h1>Years {years}</h1>
-      <h1>From {fromDate?.toString()}</h1>
+      <h1>From {fromDate ? dayjs(fromDate).format("YYYY/M/D") : ""}</h1>
       <HeatMapGrid
         data={valuesMatrix}
         xLabels={xLabels}
