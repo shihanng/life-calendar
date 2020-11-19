@@ -4,6 +4,7 @@ import "./index.css";
 import App from "./App";
 import { globalHistory, Router } from "@reach/router";
 import { QueryParamProvider } from "use-query-params";
+import "fontsource-roboto";
 
 ReactDOM.render(
   <React.StrictMode>

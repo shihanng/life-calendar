@@ -9,6 +9,6 @@ test("renders learn react link", () => {
       <App />
     </QueryParamProvider>
   );
-  const divElement = getByText(/life count down/i);
+  const divElement = getByText(/years from/i);
   expect(divElement).toBeInTheDocument();
 });
