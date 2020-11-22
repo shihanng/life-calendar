@@ -1,26 +1,32 @@
 import React from "react";
 import { useQueryParam, NumberParam, DateParam } from "use-query-params";
+import TextField from "@material-ui/core/TextField";
+import Grid from "@material-ui/core/Grid";
+import { DatePicker } from "@material-ui/pickers";
+import Typography from "@material-ui/core/Typography";
 
 const Settings = () => {
   const [years, setYears] = useQueryParam("y", NumberParam);
   const [fromDate, setFromDate] = useQueryParam("d", DateParam);
 
   return (
-    <div>
-      <label htmlFor="years">
-        <input
+    <Grid container justify="center" alignItems="center" spacing={2}>
+      <Grid item>
+        <TextField
           id="years"
           value={years ? years : 0}
-          type="number"
           onChange={(e) => setYears(+e.target.value)}
+          placeholder="0"
         />
-        years
-      </label>{" "}
-      <label htmlFor="from-date">
-        from
-        <input
+      </Grid>
+      <Grid item>
+        <Typography variant="button" gutterBottom>
+          years from
+        </Typography>
+      </Grid>
+      <Grid item>
+        <DatePicker
           id="from-date"
-          type="date"
           value={
             fromDate
               ? `${fromDate.getFullYear()}-${
@@ -28,10 +34,11 @@ const Settings = () => {
                 }-${fromDate.getDate()}`
               : "10-10-2020"
           }
-          onChange={(e) => setFromDate(new Date(e.target.value))}
+          variant="inline"
+          onChange={(e) => setFromDate(e ? e.toDate() : null)}
         />
-      </label>
-    </div>
+      </Grid>
+    </Grid>
   );
 };
 
