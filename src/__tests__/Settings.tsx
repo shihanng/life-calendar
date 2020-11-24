@@ -1,27 +1,23 @@
-import React from "react";
+import DayjsUtils from "@date-io/dayjs";
+import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import React from "react";
 import Settings from "../Settings";
-import { QueryParamProvider } from "use-query-params";
-import { MuiPickersUtilsProvider } from "@material-ui/pickers";
-import DayjsUtils from "@date-io/dayjs";
 
-test("changes in inputs should set query parameter", () => {
+test("changes in inputs should reflect in onChange", () => {
+  const handleOnChange = jest.fn();
+
+  const date = new Date(2020, 11, 1);
+
   render(
     <MuiPickersUtilsProvider utils={DayjsUtils}>
-      <QueryParamProvider>
-        <Settings />
-      </QueryParamProvider>
+      <Settings years={0} fromDate={date} onChange={handleOnChange} />
     </MuiPickersUtilsProvider>
   );
 
   const yearInput = screen.getByPlaceholderText(/0/i);
   userEvent.type(yearInput, "10");
 
-  userEvent.click(screen.getByDisplayValue(/October 10th/i));
-  userEvent.click(screen.getByText(/^2020$/));
-  userEvent.click(screen.getByText(/^1990$/));
-  userEvent.click(screen.getByText(/^24$/));
-
-  expect(window.location.search).toEqual("?d=1990-10-24&y=10");
+  expect(handleOnChange).toHaveBeenLastCalledWith(10, date);
 });

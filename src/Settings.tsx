@@ -1,21 +1,41 @@
-import React from "react";
-import { useQueryParam, NumberParam, DateParam } from "use-query-params";
-import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
-import { DatePicker } from "@material-ui/pickers";
+import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
+import { DatePicker } from "@material-ui/pickers";
+import { MaterialUiPickersDate } from "@material-ui/pickers/typings/date";
+import React, { useState } from "react";
 
-const Settings = () => {
-  const [years, setYears] = useQueryParam("y", NumberParam);
-  const [fromDate, setFromDate] = useQueryParam("d", DateParam);
+interface Props {
+  years?: number;
+  fromDate?: Date;
+  onChange: (years?: number, fromDate?: Date) => void;
+}
+
+const Settings = (props: Props) => {
+  const { onChange, ...rest } = props;
+
+  const [years, setYears] = useState(rest.years);
+  const [fromDate, setFromDate] = useState(rest.fromDate);
+
+  const handleYearsOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const years = +event.target.value;
+    setYears(years);
+    onChange(years, fromDate);
+  };
+
+  const handleFromDateOnChange = (date: MaterialUiPickersDate) => {
+    const newDate = date ? date.startOf("day").toDate() : undefined;
+    setFromDate(newDate);
+    onChange(years, newDate);
+  };
 
   return (
     <Grid container justify="center" alignItems="center" spacing={2}>
       <Grid item>
         <TextField
           id="years"
-          value={years ? years : 0}
-          onChange={(e) => setYears(+e.target.value)}
+          value={years}
+          onChange={handleYearsOnChange}
           placeholder="0"
         />
       </Grid>
@@ -27,15 +47,10 @@ const Settings = () => {
       <Grid item>
         <DatePicker
           id="from-date"
-          value={
-            fromDate
-              ? `${fromDate.getFullYear()}-${
-                  fromDate.getMonth() + 1
-                }-${fromDate.getDate()}`
-              : "10-10-2020"
-          }
+          value={fromDate}
           variant="inline"
-          onChange={(e) => setFromDate(e ? e.toDate() : null)}
+          onChange={handleFromDateOnChange}
+          data-testid="from-date"
         />
       </Grid>
     </Grid>
