@@ -7,18 +7,14 @@ import { dataToMatrix, generateData, Week } from "./helpers";
 const weeksInRow = 52;
 
 interface Props {
-  years?: number;
-  fromDate?: Date;
+  years: number;
+  fromDate: Date;
 }
 
 const Preview = (props: Props) => {
   const { years, fromDate } = props;
 
-  const rawData = generateData(
-    fromDate ? dayjs(fromDate) : dayjs(),
-    dayjs(),
-    years ? +years : 0
-  );
+  const rawData = generateData(dayjs(fromDate), dayjs(), years);
   const values = rawData.map((d) => d.days);
   const valuesMatrix = dataToMatrix(values, weeksInRow);
   const rawDataMatrix = dataToMatrix(rawData, weeksInRow);

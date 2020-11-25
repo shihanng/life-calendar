@@ -23,13 +23,13 @@ function App(_: RouteComponentProps) {
       <MuiPickersUtilsProvider utils={DayjsUtils}>
         <Container maxWidth="md">
           <Settings
-            years={years ? years : undefined}
-            fromDate={fromDate ? fromDate : undefined}
+            years={years ? years : 0}
+            fromDate={fromDate ? fromDate : new Date()}
             onChange={handleOnChange}
           />
           <Preview
-            years={years ? years : undefined}
-            fromDate={fromDate ? fromDate : undefined}
+            years={years ? years : 0}
+            fromDate={fromDate ? fromDate : new Date()}
           />
         </Container>
       </MuiPickersUtilsProvider>

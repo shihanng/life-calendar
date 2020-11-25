@@ -6,8 +6,8 @@ import { MaterialUiPickersDate } from "@material-ui/pickers/typings/date";
 import React, { useState } from "react";
 
 interface Props {
-  years?: number;
-  fromDate?: Date;
+  years: number;
+  fromDate: Date;
   onChange: (years?: number, fromDate?: Date) => void;
 }
 
@@ -24,7 +24,7 @@ const Settings = (props: Props) => {
   };
 
   const handleFromDateOnChange = (date: MaterialUiPickersDate) => {
-    const newDate = date ? date.startOf("day").toDate() : undefined;
+    const newDate = date ? date.startOf("day").toDate() : new Date();
     setFromDate(newDate);
     onChange(years, newDate);
   };
