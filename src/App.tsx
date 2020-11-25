@@ -27,7 +27,10 @@ function App(_: RouteComponentProps) {
             fromDate={fromDate ? fromDate : undefined}
             onChange={handleOnChange}
           />
-          <Preview />
+          <Preview
+            years={years ? years : undefined}
+            fromDate={fromDate ? fromDate : undefined}
+          />
         </Container>
       </MuiPickersUtilsProvider>
     </div>

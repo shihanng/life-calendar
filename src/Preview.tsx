@@ -1,25 +1,29 @@
-import React from "react";
-import { useQueryParam, NumberParam, DateParam } from "use-query-params";
-import { HeatMapGrid } from "react-grid-heatmap";
-import dayjs from "dayjs";
-import { generateData, dataToMatrix, Week } from "./helpers";
 import Container from "@material-ui/core/Container";
+import dayjs from "dayjs";
+import React from "react";
+import { HeatMapGrid } from "react-grid-heatmap";
+import { dataToMatrix, generateData, Week } from "./helpers";
 
 const weeksInRow = 52;
 
-const xLabels = new Array(weeksInRow).fill(0).map((_, i) => `${i + 1}`);
+interface Props {
+  years?: number;
+  fromDate?: Date;
+}
 
-const Preview = () => {
-  const [years] = useQueryParam("y", NumberParam);
-  const [fromDate] = useQueryParam("d", DateParam);
+const Preview = (props: Props) => {
+  const { years, fromDate } = props;
 
-  const fromDateParsed = dayjs(!!fromDate ? fromDate : "");
-
-  const rawData = generateData(fromDateParsed, dayjs(), years ? +years : 0);
+  const rawData = generateData(
+    fromDate ? dayjs(fromDate) : dayjs(),
+    dayjs(),
+    years ? +years : 0
+  );
   const values = rawData.map((d) => d.days);
   const valuesMatrix = dataToMatrix(values, weeksInRow);
   const rawDataMatrix = dataToMatrix(rawData, weeksInRow);
 
+  const xLabels = new Array(weeksInRow).fill(0).map((_, i) => `${i + 1}`);
   const yLabels = rawDataMatrix.map((row: Week[]) => {
     return row[0].startDate.format("YYYY");
   });
