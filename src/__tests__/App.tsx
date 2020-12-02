@@ -3,7 +3,7 @@ import dayjs from "dayjs";
 import "mutationobserver-shim";
 import React from "react";
 import { QueryParamProvider } from "use-query-params";
-import App from "./App";
+import App from "../App";
 
 global.MutationObserver = window.MutationObserver;
 
