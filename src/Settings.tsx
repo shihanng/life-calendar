@@ -17,6 +17,8 @@ type Inputs = {
   fromDate: string;
 };
 
+export const MAX_AGE = 150;
+
 const Settings = (props: Props) => {
   const { onChange, ...rest } = props;
   const { register, trigger, handleSubmit, errors, control } = useForm<Inputs>({
@@ -46,7 +48,8 @@ const Settings = (props: Props) => {
                 message: "Should be Integer Number",
               },
               validate: {
-                maxVal: (value) => +value < 150 || "Should be Lower Than 150",
+                maxVal: (value) =>
+                  +value < MAX_AGE || `Should be Lower Than ${MAX_AGE}`,
               },
             })}
             error={!!errors.years}
