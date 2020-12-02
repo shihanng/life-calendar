@@ -1,23 +1,38 @@
 import DayjsUtils from "@date-io/dayjs";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import "mutationobserver-shim";
 import React from "react";
 import Settings from "../Settings";
 
-test("changes in inputs should reflect in onChange", () => {
-  const handleOnChange = jest.fn();
+global.MutationObserver = window.MutationObserver;
 
-  const date = new Date(2020, 11, 1);
+test("changes in inputs should reflect in onChange", async () => {
+  const handleOnChange = jest.fn((y, d) => {
+    return Promise.resolve({ y, d });
+  });
+
+  const years = "20";
+  const fromDate = "2000-11-01";
 
   render(
     <MuiPickersUtilsProvider utils={DayjsUtils}>
-      <Settings years={0} fromDate={date} onChange={handleOnChange} />
+      <Settings years="" fromDate="" onChange={handleOnChange} />
     </MuiPickersUtilsProvider>
   );
 
-  const yearInput = screen.getByPlaceholderText(/0/i);
-  userEvent.type(yearInput, "10");
+  userEvent.type(screen.getByPlaceholderText(/120/i), years);
 
-  expect(handleOnChange).toHaveBeenLastCalledWith(10, date);
+  fireEvent.input(screen.getByTestId(/from-date/i), {
+    target: {
+      value: fromDate,
+    },
+  });
+
+  fireEvent.submit(screen.getByText(/^go$/i));
+
+  await waitFor(() => {
+    expect(handleOnChange).toHaveBeenLastCalledWith(years, fromDate);
+  });
 });
