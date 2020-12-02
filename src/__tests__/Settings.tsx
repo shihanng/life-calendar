@@ -3,16 +3,26 @@ import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import {
   fireEvent,
   render as rtlRender,
+  RenderOptions,
   screen,
   waitFor,
-  RenderOptions,
 } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import dayjs from "dayjs";
+import faker from "faker";
 import "mutationobserver-shim";
 import React from "react";
-import Settings from "../Settings";
+import Settings, { MAX_AGE } from "../Settings";
 
 global.MutationObserver = window.MutationObserver;
+
+function createYears(min = 0, max = MAX_AGE) {
+  return `${faker.random.number({ min, max })}`;
+}
+
+function createFromDate() {
+  return dayjs(faker.date.recent()).format("YYYY-MM-DD");
+}
 
 function render(ui: React.ReactElement, renderOptions?: RenderOptions) {
   const wrapper: React.ComponentType = ({ children }) => {
@@ -49,8 +59,8 @@ function renderSettings(years: string, fromDate: string) {
 }
 
 test("changes in inputs should reflect in onChange", async () => {
-  const years = "20";
-  const fromDate = "2000-11-01";
+  const years = createYears();
+  const fromDate = createFromDate();
 
   const {
     handleOnChange,
@@ -75,11 +85,11 @@ test("changes in inputs should reflect in onChange", async () => {
 });
 
 test("years should not be greater than MAX_AGE", async () => {
-  const years = "1000";
+  const years = createYears(MAX_AGE, MAX_AGE + 100);
 
   const { handleOnChange, yearsInput, submitButton } = renderSettings(
-    "10",
-    "1985-04-24"
+    createYears(),
+    createFromDate()
   );
 
   userEvent.type(yearsInput, years);
