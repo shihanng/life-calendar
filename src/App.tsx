@@ -3,18 +3,26 @@ import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import { RouteComponentProps } from "@reach/router";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { StringParam, useQueryParam } from "use-query-params";
 import Preview from "./Preview";
 import Settings from "./Settings";
-import { useQueryParam, NumberParam, DateParam } from "use-query-params";
 
 function App(_: RouteComponentProps) {
-  const [years, setYears] = useQueryParam("y", NumberParam);
-  const [fromDate, setFromDate] = useQueryParam("d", DateParam);
+  const [qy, setQy] = useQueryParam("y", StringParam);
+  const [qd, setQd] = useQueryParam("d", StringParam);
 
-  const handleOnChange = (years?: number, fromDate?: Date) => {
-    setYears(years);
-    setFromDate(fromDate);
+  const [years, setYears] = useState<string | undefined | null>(qy);
+  const [fromDate, setFromDate] = useState<string | undefined | null>(qd);
+
+  useEffect(() => {
+    setQy(years);
+    setQd(fromDate);
+  }, [years, fromDate, setQy, setQd]);
+
+  const handleOnChange = (years?: string, fromDate?: string) => {
+    setYears(years ? years : undefined);
+    setFromDate(fromDate ? fromDate : undefined);
   };
 
   return (
@@ -23,13 +31,13 @@ function App(_: RouteComponentProps) {
       <MuiPickersUtilsProvider utils={DayjsUtils}>
         <Container maxWidth="md">
           <Settings
-            years={years ? years : 0}
-            fromDate={fromDate ? fromDate : new Date()}
+            years={years ? years : ""}
+            fromDate={fromDate ? fromDate : ""}
             onChange={handleOnChange}
           />
           <Preview
-            years={years ? years : 0}
-            fromDate={fromDate ? fromDate : new Date()}
+            years={years ? years : ""}
+            fromDate={fromDate ? fromDate : ""}
           />
         </Container>
       </MuiPickersUtilsProvider>
