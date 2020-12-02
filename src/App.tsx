@@ -21,8 +21,8 @@ function App(_: RouteComponentProps) {
   }, [years, fromDate, setQy, setQd]);
 
   const handleOnChange = (years?: string, fromDate?: string) => {
-    setYears(years ? years : undefined);
-    setFromDate(fromDate ? fromDate : undefined);
+    setYears(years);
+    setFromDate(fromDate);
   };
 
   return (
