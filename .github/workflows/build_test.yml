@@ -19,5 +19,10 @@ jobs:
           node-version: "12"
           check-latest: true
       - run: yarn install
-      - run: yarn build
-      - run: yarn test
+      - run: yarn test --coverage --watchAll=false
+
+      - uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          fail_ci_if_error: true
+          verbose: true
