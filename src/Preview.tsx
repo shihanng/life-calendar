@@ -1,8 +1,8 @@
-import Container from "@material-ui/core/Container";
 import dayjs from "dayjs";
 import React from "react";
 import { HeatMapGrid } from "react-grid-heatmap";
 import { dataToMatrix, generateData, Week } from "./helpers";
+import Grid from "@material-ui/core/Grid";
 
 const weeksInRow = 52;
 
@@ -25,44 +25,42 @@ const Preview = (props: Props) => {
   });
 
   return (
-    <>
-      <Container>
-        {values.length > 0 && (
-          <HeatMapGrid
-            data={valuesMatrix}
-            xLabels={xLabels}
-            yLabels={yLabels}
-            cellRender={(x, y, value) => (
-              <div title={`Pos(${x}, ${y}) = ${value}`}></div>
-            )}
-            xLabelsStyle={(index) => ({
-              color: index % 2 ? "transparent" : "#777",
-              fontSize: ".7rem",
-              margin: "1px 1px 1px 1px",
-            })}
-            yLabelsStyle={(index) => ({
-              color: index % 2 ? "transparent" : "#777",
-              fontSize: ".8rem",
-              textTransform: "uppercase",
-              margin: "1px 1px 1px 1px",
-            })}
-            cellStyle={(_x, _y, ratio) => ({
-              background: `rgb(12, 160, 44, ${ratio})`,
-              fontSize: ".8rem",
-              color: `rgb(0, 0, 0, ${ratio / 2 + 0.4})`,
-              borderWidth: "1px",
-              borderColor: "black",
-              margin: "1px 1px 1px 1px",
-            })}
-            cellHeight="13px"
-            xLabelsPos="bottom"
-            onClick={(x, y) => alert(`Clicked (${x}, ${y})`)}
-            yLabelsPos="right"
-            square
-          />
-        )}
-      </Container>
-    </>
+    <Grid>
+      {values.length > 0 && (
+        <HeatMapGrid
+          data={valuesMatrix}
+          xLabels={xLabels}
+          yLabels={yLabels}
+          cellRender={(x, y, value) => (
+            <div title={`Pos(${x}, ${y}) = ${value}`}></div>
+          )}
+          xLabelsStyle={(index) => ({
+            color: index % 2 ? "transparent" : "#777",
+            fontSize: ".7rem",
+            margin: "1px 1px 1px 1px",
+          })}
+          yLabelsStyle={(index) => ({
+            color: index % 2 ? "transparent" : "#777",
+            fontSize: ".8rem",
+            textTransform: "uppercase",
+            margin: "1px 1px 1px 1px",
+          })}
+          cellStyle={(_x, _y, ratio) => ({
+            background: `rgb(12, 160, 44, ${ratio})`,
+            fontSize: ".8rem",
+            color: `rgb(0, 0, 0, ${ratio / 2 + 0.4})`,
+            borderWidth: "1px",
+            borderColor: "black",
+            margin: "1px 1px 1px 1px",
+          })}
+          cellHeight="13px"
+          xLabelsPos="bottom"
+          onClick={(x, y) => alert(`Clicked (${x}, ${y})`)}
+          yLabelsPos="right"
+          square
+        />
+      )}
+    </Grid>
   );
 };
 

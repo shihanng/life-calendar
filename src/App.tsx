@@ -1,5 +1,4 @@
 import DayjsUtils from "@date-io/dayjs";
-import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
@@ -8,11 +7,11 @@ import GitHubIcon from "@material-ui/icons/GitHub";
 import TwitterIcon from "@material-ui/icons/Twitter";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import { RouteComponentProps } from "@reach/router";
+import dayjs from "dayjs";
 import React, { useEffect, useState } from "react";
 import { StringParam, useQueryParam } from "use-query-params";
 import Preview from "./Preview";
 import Settings from "./Settings";
-import dayjs from "dayjs";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,7 +22,6 @@ const useStyles = makeStyles((theme) => ({
   footer: {
     padding: theme.spacing(3, 2),
     marginTop: "auto",
-    backgroundColor: theme.palette.grey[200],
   },
   icon: {
     color: theme.palette.text.primary,
@@ -52,19 +50,19 @@ function App(_: RouteComponentProps) {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <MuiPickersUtilsProvider utils={DayjsUtils}>
-        <Container maxWidth="md">
+      <Grid alignItems="center" direction="column" container justify="center">
+        <MuiPickersUtilsProvider utils={DayjsUtils}>
           <Settings
             years={years ? years : ""}
             fromDate={fromDate ? fromDate : ""}
             onChange={handleOnChange}
           />
-          <Preview
-            years={years ? years : ""}
-            fromDate={fromDate ? fromDate : ""}
-          />
-        </Container>
-      </MuiPickersUtilsProvider>
+        </MuiPickersUtilsProvider>
+        <Preview
+          years={years ? years : ""}
+          fromDate={fromDate ? fromDate : ""}
+        />
+      </Grid>
       <footer className={classes.footer}>
         <Grid
           spacing={3}
