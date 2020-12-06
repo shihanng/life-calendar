@@ -5,6 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import { KeyboardDatePicker } from "@material-ui/pickers";
 import React, { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
+import { makeStyles } from "@material-ui/core/styles";
 
 interface Props {
   years: string;
@@ -18,6 +19,19 @@ type Inputs = {
 };
 
 export const MAX_AGE = 150;
+
+const useStyles = makeStyles((theme) => ({
+  main: {
+    marginTop: theme.spacing(2),
+    paddingBottom: 20,
+    height: 60,
+  },
+  text: {
+    paddingTop: 5,
+    paddingBottom: 8,
+    height: 32,
+  },
+}));
 
 const Settings = (props: Props) => {
   const { onChange, ...rest } = props;
@@ -34,14 +48,17 @@ const Settings = (props: Props) => {
     trigger();
   }, [trigger]);
 
+  const classes = useStyles();
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <Grid container justify="center" alignItems="center" spacing={2}>
+    <form className={classes.main} onSubmit={handleSubmit(onSubmit)}>
+      <Grid container spacing={2}>
         <Grid item>
           <TextField
+            inputProps={{ min: 0, style: { textAlign: "right" } }}
             name="years"
             defaultValue={rest.years}
-            placeholder="120"
+            placeholder="90"
             inputRef={register({
               pattern: {
                 value: /^[0-9]+$/,
@@ -57,7 +74,7 @@ const Settings = (props: Props) => {
           />
         </Grid>
         <Grid item>
-          <Typography variant="button" gutterBottom>
+          <Typography className={classes.text} variant="body1">
             years from
           </Typography>
         </Grid>
@@ -80,7 +97,12 @@ const Settings = (props: Props) => {
           />
         </Grid>
         <Grid item>
-          <Button size="small" type="submit" variant="contained">
+          <Button
+            color="primary"
+            size="small"
+            type="submit"
+            variant="contained"
+          >
             Go
           </Button>
         </Grid>
