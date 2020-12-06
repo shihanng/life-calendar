@@ -7,7 +7,6 @@ import GitHubIcon from "@material-ui/icons/GitHub";
 import TwitterIcon from "@material-ui/icons/Twitter";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import { RouteComponentProps } from "@reach/router";
-import dayjs from "dayjs";
 import React, { useEffect, useState } from "react";
 import { StringParam, useQueryParam } from "use-query-params";
 import Preview from "./Preview";
@@ -87,9 +86,7 @@ function App(_: RouteComponentProps) {
           alignItems="center"
         >
           <Grid item>
-            <Typography variant="body2">
-              &copy; Copyright {`${dayjs().format("YYYY")}`}, Shi Han NG
-            </Typography>
+            <Typography variant="body2">Created by Shi Han NG</Typography>
           </Grid>
           <Grid item>
             <a href="https://twitter.com/shihanng">
