@@ -1,7 +1,8 @@
 import dayjs, { Dayjs } from "dayjs";
-import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
 import isBetween from "dayjs/plugin/isBetween";
+import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
 import weekday from "dayjs/plugin/weekday";
+import { MAX_AGE } from "./Settings";
 
 dayjs.extend(isSameOrBefore);
 dayjs.extend(weekday);
@@ -17,6 +18,10 @@ export const generateData = (
   todayDate: Dayjs,
   years: number
 ): Array<Week> => {
+  if (years >= MAX_AGE) {
+    return [];
+  }
+
   const endDate = startDate.add(years, "year");
 
   let currentDate = startDate.weekday(0);
