@@ -45,7 +45,7 @@ function renderSettings(years: string, fromDate: string) {
     <Settings years={years} fromDate={fromDate} onChange={handleOnChange} />
   );
 
-  const yearsInput = screen.getByPlaceholderText(/120/i);
+  const yearsInput = screen.getByPlaceholderText(/90/i);
   const fromDateInput = screen.getByTestId(/from-date/i);
   const submitButton = screen.getByText(/^go$/i);
 

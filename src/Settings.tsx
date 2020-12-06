@@ -58,7 +58,7 @@ const Settings = (props: Props) => {
             inputProps={{ min: 0, style: { textAlign: "right" } }}
             name="years"
             defaultValue={rest.years}
-            placeholder="120"
+            placeholder="90"
             inputRef={register({
               pattern: {
                 value: /^[0-9]+$/,
@@ -97,7 +97,12 @@ const Settings = (props: Props) => {
           />
         </Grid>
         <Grid item>
-          <Button size="small" type="submit" variant="contained">
+          <Button
+            color="primary"
+            size="small"
+            type="submit"
+            variant="contained"
+          >
             Go
           </Button>
         </Grid>

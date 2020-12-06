@@ -41,7 +41,7 @@ function render(
   });
 
   return {
-    yearsInput: getByPlaceholderText(/120/i),
+    yearsInput: getByPlaceholderText(/90/i),
     fromDateInput: getByTestId(/from-date/i),
     submitButton: screen.getByText(/^go$/i),
     heatmap: screen.queryAllByTitle(/^Pos\(\d+, \d+\)/),
