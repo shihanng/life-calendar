@@ -19,7 +19,6 @@ jobs:
           node-version: "12"
           check-latest: true
       - run: yarn install
-      - run: yarn build
       - run: yarn test --coverage --watchAll=false
 
       - uses: codecov/codecov-action@v1
