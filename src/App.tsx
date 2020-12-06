@@ -107,7 +107,7 @@ function App(_: RouteComponentProps) {
               </a>
             </Grid>
             <Grid item>
-              <a href="https://github.com/shihanng/life-count-down">
+              <a href="https://github.com/shihanng/life-calendar">
                 <GitHubIcon className={classes.icon} />
               </a>
             </Grid>
