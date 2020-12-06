@@ -19,6 +19,9 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     minHeight: "100vh",
   },
+  description: {
+    marginBottom: 10,
+  },
   footer: {
     padding: theme.spacing(3, 2),
     marginTop: "auto",
@@ -58,6 +61,18 @@ function App(_: RouteComponentProps) {
             onChange={handleOnChange}
           />
         </MuiPickersUtilsProvider>
+        <Grid item xs={8}>
+          <div className={classes.description}>
+            <a href="https://twitter.com/waitbutwhy">Tim Urban</a> introduced
+            the idea of life calendar in his talk titled{" "}
+            <a href="https://www.ted.com/talks/tim_urban_inside_the_mind_of_a_master_procrastinator">
+              Inside the mind of master procrastinator
+            </a>
+            . Each box in the calendar represents a week. Each row represents a
+            year. The idea is to show us our own deadline and help us to stop
+            procastinating.{" "}
+          </div>
+        </Grid>
         <Preview
           years={years ? years : ""}
           fromDate={fromDate ? fromDate : ""}
